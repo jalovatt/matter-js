@@ -1,5 +1,5 @@
 /**
-* matter-js 0.14.2 by @liabru 2018-06-11
+* matter-js 0.14.2 by @liabru 2019-01-31
 * http://brm.io/matter-js/
 * License MIT
 */
@@ -5706,6 +5706,8 @@ var Common = _dereq_('../core/Common');
             scrollX = (window.pageXOffset !== undefined) ? window.pageXOffset : rootNode.scrollLeft,
             scrollY = (window.pageYOffset !== undefined) ? window.pageYOffset : rootNode.scrollTop,
             touches = event.changedTouches,
+            elementWidth = element.width || element.clientWidth,
+            elementHeight = element.height || element.clientHeight,
             x, y;
         
         if (touches) {
@@ -5716,9 +5718,14 @@ var Common = _dereq_('../core/Common');
             y = event.pageY - elementBounds.top - scrollY;
         }
 
+        if (elementWidth.animVal) {
+            elementWidth = elementWidth.animVal.value;
+            elementHeight = elementHeight.animVal.value;
+        }
+
         return { 
-            x: x / (element.clientWidth / (element.width || element.clientWidth) * pixelRatio),
-            y: y / (element.clientHeight / (element.height || element.clientHeight) * pixelRatio)
+            x: x / (element.clientWidth / elementWidth * pixelRatio),
+            y: y / (element.clientHeight / elementHeight * pixelRatio)
         };
     };
 
