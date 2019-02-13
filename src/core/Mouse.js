@@ -182,8 +182,8 @@ var Common = require('../core/Common');
             scrollX = (window.pageXOffset !== undefined) ? window.pageXOffset : rootNode.scrollLeft,
             scrollY = (window.pageYOffset !== undefined) ? window.pageYOffset : rootNode.scrollTop,
             touches = event.changedTouches,
-            elementWidth = element.width || element.clientWidth,
-            elementHeight = element.height || element.clientHeight,
+            elementWidth = element.width || element.clientWidth || elementBounds.width,
+            elementHeight = element.height || element.clientHeight || elementBounds.height,
             x, y;
         
         if (touches) {
